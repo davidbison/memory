@@ -5,7 +5,10 @@ import random
 
 # helper function to initialize globals
 def new_game():
-    pass
+  global deck
+  set1 = range(9)
+  set2 = range(9)
+  deck = set1 + set2
 
 
 # define event handlers
