@@ -15,6 +15,7 @@ def new_game():
     set1 = range(9)
     set2 = range(9)
     deck = set1 + set2
+    random.shuffle(deck)
 
 
 # define event handlers
