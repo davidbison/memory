@@ -49,11 +49,13 @@ def draw(canvas):
                             56,
                             "orange")
         else:
-            for card in exposed:
-                canvas.draw_polygon([point1, [point1[0]+50, point1[1]], [point1[0]+50, point1[1]+100],[point1[0],point1[1]+100]],
-                    2,
-                    "black",
-                    "green")
+            canvas.draw_polygon([point1,
+                                  [point1[0]+50, point1[1]],
+                                  [point1[0]+50, point1[1]+100],
+                                  [point1[0],point1[1]+100]],
+                                2,
+                                "black",
+                                "green")
         i += 1
         card_posX += 50
         point1[0] += 50
