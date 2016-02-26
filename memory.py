@@ -65,6 +65,11 @@ def mouseclick(pos):
     print "Card face value:", deck[selected_card]
     print "Card index:", selected_card
 
+    # Flip cards over and back
+    if not exposed[selected_card]:
+      exposed[selected_card] = True
+    elif exposed[selected_card]:
+      exposed[selected_card] = False
 
 # cards are logically 50x100 pixels in size
 def draw(canvas):
