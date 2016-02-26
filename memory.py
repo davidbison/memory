@@ -32,68 +32,38 @@ def mouseclick(pos):
     click_position = list(pos)
     if click_position[0] > 0 and click_position[0] <= 50:
         selected_card = 0
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 50 and click_position[0] < 100:
         selected_card = 1
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 100 and click_position[0] < 150:
         selected_card = 2
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 150 and click_position[0] < 200:
         selected_card = 3
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 200 and click_position[0] < 250:
         selected_card = 4
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 250 and click_position[0] < 300:
         selected_card = 5
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 300 and click_position[0] < 350:
         selected_card = 6
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 350 and click_position[0] < 400:
         selected_card = 7
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 400 and click_position[0] < 450:
         selected_card = 8
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 450 and click_position[0] < 500:
         selected_card = 9
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 500 and click_position[0] < 550:
         selected_card = 10
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 550 and click_position[0] < 600:
         selected_card = 11
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 600 and click_position[0] < 650:
         selected_card = 12
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 650 and click_position[0] < 700:
         selected_card = 13
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 700 and click_position[0] < 750:
         selected_card = 14
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
     elif click_position[0] > 750 and click_position[0] < 800:
         selected_card = 15
-        print "Card face value:", deck[selected_card]
-        print "Card index:", selected_card
+    print "Card face value:", deck[selected_card]
+    print "Card index:", selected_card
 
 
 # cards are logically 50x100 pixels in size
