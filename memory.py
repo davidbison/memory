@@ -26,7 +26,7 @@ def pt_to_px(font_size):
 
 # define event handlers
 def mouseclick(pos):
-    global match_attempt, deck, exposed, selected_card
+    global deck, exposed, selected_card
 
     # Convert mouse click position to card index
     click_position = list(pos)
