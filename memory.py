@@ -18,6 +18,12 @@ def new_game():
     random.shuffle(deck)
 
 
+# helper function to convert pt to px
+def pt_to_px(font_size):
+    # 12pt font is 16px
+    return font_size * 16 / 12
+
+
 # define event handlers
 def mouseclick(pos):
     # add game state logic here
@@ -27,7 +33,7 @@ def mouseclick(pos):
 # cards are logically 50x100 pixels in size
 def draw(canvas):
     card_posX = 12
-    card_posY = FRAME_HEIGHT - (CARD_FONT_SIZE / 2 + 4)
+    card_posY = pt_to_px(CARD_FONT_SIZE)
     for card in deck:
         canvas.draw_text(str(card),
                          [card_posX, card_posY],
