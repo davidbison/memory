@@ -32,7 +32,7 @@ def mouseclick(pos):
 
 # cards are logically 50x100 pixels in size
 def draw(canvas):
-    global exposed, upper_left, upper_right, lower_left, lower_right
+    global exposed
     card_posX = 12
     card_posY = FRAME_HEIGHT - 26
     i = 0
