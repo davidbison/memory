@@ -12,8 +12,11 @@ FRAME_HEIGHT = 100
 # helper function to initialize globals
 def new_game():
     global deck, exposed, match_check, match_check_i, state, matched
-    set1, set2 = range(9), range(9)
+    set1, set2 = range(8), range(8)
+    print set1
+    print set2
     deck = set1 + set2
+    print deck
     match_check = []
     match_check_i = []
     matched = []
@@ -76,33 +79,39 @@ def mouseclick(pos):
         #exposed[selected_card] = False
 
     # First flip
-    if state == 0:
-        if not exposed[selected_card]:
+    if not exposed[selected_card]:
+        if state == 0:
+            matched = False
+            #if not exposed[selected_card]:
             exposed[selected_card] = True
             match_check_i.append(selected_card)
             match_check.append(deck[selected_card])
             state = 1
     # Second flip to match pairs
-    elif state == 1:
+        elif state == 1:
         # If both cards match
-        if not exposed[selected_card]:
+            #if not exposed[selected_card]:
             exposed[selected_card] = True
             match_check_i.append(selected_card)
             match_check.append(deck[selected_card])
             if match_check[1] == match_check[0] and match_check_i[1] != match_check_i[0]:
-                matched.extend(match_check)
+                matched = True
                 print "Match!"
                 print matched
             state = 2
-    else:
-        if not exposed[selected_card]:
-            exposed[match_check_i[0]] = False
-            exposed[match_check_i[1]] = False
+    # New round to uncover single card
+        else:
+            #if not exposed[selected_card]:
+            # Cover cards that aren't matched
+            if not matched:
+                exposed[match_check_i[0]] = False
+                exposed[match_check_i[1]] = False
             exposed[selected_card] = True
             match_check = []
             match_check.append(deck[selected_card])
             match_check_i = []
             match_check_i.append(selected_card)
+            matched = False
             state = 1
 
 
