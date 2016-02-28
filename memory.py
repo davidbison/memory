@@ -11,7 +11,7 @@ FRAME_HEIGHT = 100
 
 # helper function to initialize globals
 def new_game():
-    global deck, exposed, match_check, match_check_i, state, matched
+    global deck, exposed, match_check, match_check_i, state, matched, turn_counter, turn_counter_label
     set1, set2 = range(8), range(8)
     print set1
     print set2
@@ -21,6 +21,9 @@ def new_game():
     match_check_i = []
     matched = []
     state = 0
+    turn_counter = 0
+    turn_counter_label = "Turn = " + str(turn_counter)
+    label.set_text(turn_counter_label)
     random.shuffle(deck)
     exposed = [card == None for card in deck]
 
@@ -33,7 +36,7 @@ def pt_to_px(font_size):
 
 # define event handlers
 def mouseclick(pos):
-    global deck, exposed, selected_card, set_pair, state, matched, match_check, match_check_i
+    global deck, exposed, selected_card, set_pair, state, matched, match_check, match_check_i, turn_counter, turn_counter_label
 
     # Convert mouse click position to card index within deck list
     click_position = list(pos)
@@ -69,17 +72,10 @@ def mouseclick(pos):
         selected_card = 14
     elif click_position[0] > 750 and click_position[0] < 800:
         selected_card = 15
-    print "Card face value:", deck[selected_card]
-    print "Card index:", selected_card
 
-    # Flip cards over and back
-    #if not exposed[selected_card]:
-        #exposed[selected_card] = True
-    #elif exposed[selected_card]:
-        #exposed[selected_card] = False
-
-    # First flip
+    # Limit state change only on unflipped cards
     if not exposed[selected_card]:
+        # First flip
         if state == 0:
             matched = False
             #if not exposed[selected_card]:
@@ -87,10 +83,12 @@ def mouseclick(pos):
             match_check_i.append(selected_card)
             match_check.append(deck[selected_card])
             state = 1
-    # Second flip to match pairs
+            turn_counter += 1
+            turn_counter_label = "Turn = " + str(turn_counter)
+            label.set_text(turn_counter_label)
+        # Second flip to match pairs
         elif state == 1:
-        # If both cards match
-            #if not exposed[selected_card]:
+            # If both cards match
             exposed[selected_card] = True
             match_check_i.append(selected_card)
             match_check.append(deck[selected_card])
@@ -99,9 +97,8 @@ def mouseclick(pos):
                 print "Match!"
                 print matched
             state = 2
-    # New round to uncover single card
+        # New round to uncover single card
         else:
-            #if not exposed[selected_card]:
             # Cover cards that aren't matched
             if not matched:
                 exposed[match_check_i[0]] = False
@@ -113,11 +110,10 @@ def mouseclick(pos):
             match_check_i.append(selected_card)
             matched = False
             state = 1
+            turn_counter += 1
+            turn_counter_label = "Turn = " + str(turn_counter)
+            label.set_text(turn_counter_label)
 
-
-
-
-    print match_check
 
 # cards are logically 50x100 pixels in size
 def draw(canvas):
@@ -132,7 +128,6 @@ def draw(canvas):
     If not, draw a rectangle
     """
     for card in deck:
-#   if not exposed[i]:
         if exposed[i]:
             canvas.draw_text(str(card),
                             [card_posX + 12, card_posY + (FRAME_HEIGHT - 26)],
