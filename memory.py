@@ -13,10 +13,7 @@ FRAME_HEIGHT = 100
 def new_game():
     global deck, exposed, match_check, match_check_i, state, matched, turn_counter, turn_counter_label
     set1, set2 = range(8), range(8)
-    print set1
-    print set2
     deck = set1 + set2
-    print deck
     match_check = []
     match_check_i = []
     matched = []
