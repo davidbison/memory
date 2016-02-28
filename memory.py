@@ -91,8 +91,6 @@ def mouseclick(pos):
             match_check.append(deck[selected_card])
             if match_check[1] == match_check[0] and match_check_i[1] != match_check_i[0]:
                 matched = True
-                print "Match!"
-                print matched
             state = 2
         # New round to uncover single card
         else:
