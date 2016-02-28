@@ -11,9 +11,13 @@ FRAME_HEIGHT = 100
 
 # helper function to initialize globals
 def new_game():
-    global deck, exposed
+    global deck, exposed, match_check, match_check_i, state, matched
     set1, set2 = range(9), range(9)
     deck = set1 + set2
+    match_check = []
+    match_check_i = []
+    matched = []
+    state = 0
     random.shuffle(deck)
     exposed = [card == None for card in deck]
 
@@ -26,9 +30,9 @@ def pt_to_px(font_size):
 
 # define event handlers
 def mouseclick(pos):
-    global deck, exposed, selected_card
+    global deck, exposed, selected_card, set_pair, state, matched, match_check, match_check_i
 
-    # Convert mouse click position to card index
+    # Convert mouse click position to card index within deck list
     click_position = list(pos)
     if click_position[0] > 0 and click_position[0] <= 50:
         selected_card = 0
@@ -66,8 +70,45 @@ def mouseclick(pos):
     print "Card index:", selected_card
 
     # Flip cards over and back
-    if not exposed[selected_card]:
-      exposed[selected_card] = True
+    #if not exposed[selected_card]:
+        #exposed[selected_card] = True
+    #elif exposed[selected_card]:
+        #exposed[selected_card] = False
+
+    # First flip
+    if state == 0:
+        if not exposed[selected_card]:
+            exposed[selected_card] = True
+            match_check_i.append(selected_card)
+            match_check.append(deck[selected_card])
+            state = 1
+    # Second flip to match pairs
+    elif state == 1:
+        # If both cards match
+        if not exposed[selected_card]:
+            exposed[selected_card] = True
+            match_check_i.append(selected_card)
+            match_check.append(deck[selected_card])
+            if match_check[1] == match_check[0] and match_check_i[1] != match_check_i[0]:
+                matched.extend(match_check)
+                print "Match!"
+                print matched
+            state = 2
+    else:
+        if not exposed[selected_card]:
+            exposed[match_check_i[0]] = False
+            exposed[match_check_i[1]] = False
+            exposed[selected_card] = True
+            match_check = []
+            match_check.append(deck[selected_card])
+            match_check_i = []
+            match_check_i.append(selected_card)
+            state = 1
+
+
+
+
+    print match_check
 
 # cards are logically 50x100 pixels in size
 def draw(canvas):
@@ -82,6 +123,7 @@ def draw(canvas):
     If not, draw a rectangle
     """
     for card in deck:
+#   if not exposed[i]:
         if exposed[i]:
             canvas.draw_text(str(card),
                             [card_posX + 12, card_posY + (FRAME_HEIGHT - 26)],
