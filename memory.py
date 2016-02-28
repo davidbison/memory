@@ -132,15 +132,15 @@ def draw(canvas):
             canvas.draw_text(str(card),
                             [card_posX + 12, card_posY + (FRAME_HEIGHT - 26)],
                             56,
-                            "orange")
+                            "#FD5A1E")
         else:
             canvas.draw_polygon([point1,
                                   [point1[0]+50, point1[1]],
                                   [point1[0]+50, point1[1]+100],
                                   [point1[0],point1[1]+100]],
                                 2,
-                                "black",
-                                "green")
+                                "#000",
+                                "#FFFDD0")
         i += 1
         card_posX += 50
         point1[0] += 50
